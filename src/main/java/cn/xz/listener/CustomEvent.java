@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationEvent;
  **/
 class CustomEvent extends ApplicationEvent {
 
+    // 创建时传入事件源
     public CustomEvent(Object source) {
         super(source);
     }

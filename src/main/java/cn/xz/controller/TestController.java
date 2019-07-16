@@ -1,5 +1,8 @@
 package cn.xz.controller;
 
+import cn.xz.bean.User;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +39,7 @@ public class TestController {
     }
 
     public static void main(String[] args) {
-
+        ApplicationContext context = new AnnotationConfigApplicationContext();
+        context.getBean(User.class);
     }
 }
