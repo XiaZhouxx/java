@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
+
 /**
  * @author xz
  * @ClassName UserService
@@ -13,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2018/12/9 0009 11:26
  **/
 @Service
-public class UserService {
+public class UserService extends ClassLoader  {
     @Autowired
     UserMapper userMapper;
 
@@ -32,5 +34,15 @@ public class UserService {
 
         return name;
 
+    }
+
+    @Override
+    public Class<?> loadClass(String name) throws ClassNotFoundException {
+        return super.loadClass(name);
+    }
+
+    @Override
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
+        return super.findClass(name);
     }
 }
