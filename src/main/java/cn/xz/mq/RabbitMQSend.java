@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * @author xz
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Description 发送消息
  * @date 2019/7/16 0016 14:05
  **/
+@Component
 public class RabbitMQSend implements RabbitTemplate.ConfirmCallback {
 
     Logger logger = Logger.getLogger(RabbitMQSend.class);
@@ -18,14 +20,13 @@ public class RabbitMQSend implements RabbitTemplate.ConfirmCallback {
     @Autowired
     RabbitTemplate template;
 
-
     // 消息发送确认 保证消息发送端不会丢失消息
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         String msg = correlationData.getId();
-        if(ack) {
+        if (ack) {
             logger.info("消息发送成功" + msg);
-        }else{
+        } else {
             logger.error("消息发送失败");
             // 继续发送
             this.send(msg);
@@ -34,7 +35,7 @@ public class RabbitMQSend implements RabbitTemplate.ConfirmCallback {
 
     public void send(String msg) {
         template.setConfirmCallback(this);
-        template.convertAndSend("ex_test",msg);
+        template.convertAndSend("ex_test", msg);
     }
 
 
