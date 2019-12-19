@@ -1,4 +1,4 @@
-package cn.xz.socket;
+package cn.xz.io;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,10 +9,10 @@ import java.util.Scanner;
 /**
  * @author xz
  * @ClassName MyClietnSocket
- * @Description 客户端
+ * @Description BIO 客户端
  * @date 2019/7/8 0008 11:45
  **/
-public class MyClietnSocket {
+public class MyBIOClientSocket {
     public static void main(String[] args) {
         try {
             // 绑定服务端
@@ -25,6 +25,7 @@ public class MyClietnSocket {
             inputStream.read(b);
             inputStream.close();
             socket.getOutputStream().write(b);*/
+            // 获取输出输入流
             OutputStream outputStream = socket.getOutputStream();
             InputStream inputStream = socket.getInputStream();
             // 接收消息
@@ -32,7 +33,7 @@ public class MyClietnSocket {
                 while(true){
                     byte[] b = new byte[1024];
                     try {
-                        inputStream.read(b);
+                        inputStream.read(b); // 阻塞 一直等待服务器发来消息
                         System.out.println("服务端回发的消息:" + new String(b,0,b.length));
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -44,7 +45,7 @@ public class MyClietnSocket {
                 while (true){
                     try {
                         String msg = sc.nextLine();
-                        outputStream.write(msg.getBytes());
+                        outputStream.write(msg.getBytes()); // 写到服务器中
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

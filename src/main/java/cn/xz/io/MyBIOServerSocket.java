@@ -1,6 +1,8 @@
-package cn.xz.socket;
+package cn.xz.io;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -8,10 +10,10 @@ import java.util.Scanner;
 /**
  * @author xz
  * @ClassName MyServerSocket
- * @Description 服务端
+ * @Description BIO 服务端
  * @date 2019/7/8 0008 11:46
  **/
-public class MyServerSocket {
+public class MyBIOServerSocket {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
