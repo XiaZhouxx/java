@@ -1,11 +1,15 @@
-package cn.xz.controller;
+package cn.xz.testweb.controller;
 
-import cn.xz.bean.User;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import cn.xz.test.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -14,6 +18,7 @@ import java.util.concurrent.Semaphore;
  * @Description
  * @date 2019/6/6 0006 14:46
  **/
+@Api("测试Controller")
 @RestController
 public class TestController {
     /**
@@ -22,7 +27,8 @@ public class TestController {
     static Semaphore semaphore = new Semaphore(1);
 
 
-    @RequestMapping("/test")
+    @ApiOperation(value = "测试方法",notes = "描述这个测试方法")
+    @GetMapping("/test")
     public void test() {
         try{
             System.out.println("请求进入");
@@ -38,8 +44,15 @@ public class TestController {
         }
     }
 
-    public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext();
-        context.getBean(User.class);
+
+    @RequestMapping("/save")
+    public List send(@RequestBody Map<String,List<User>> user) {
+        System.out.println(user.get("list"));
+        return user.get("list");
+    }
+
+    @RequestMapping("/testError")
+    public void exception() {
+        throw new RuntimeException("手动抛出异常");
     }
 }

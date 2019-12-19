@@ -1,4 +1,4 @@
-package cn.xz.mapper;
+package cn.xz.testweb.mapper;
 
 import cn.xz.bean.Clazz;
 import cn.xz.bean.Partition;

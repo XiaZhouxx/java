@@ -1,12 +1,10 @@
-package cn.xz.service;
+package cn.xz.testweb.service;
 
-import cn.xz.mapper.UserMapper;
+import cn.xz.testweb.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.Serializable;
 
 /**
  * @author xz
@@ -15,7 +13,7 @@ import java.io.Serializable;
  * @date 2018/12/9 0009 11:26
  **/
 @Service
-public class UserService extends ClassLoader  {
+public class UserService {
     @Autowired
     UserMapper userMapper;
 
@@ -36,13 +34,4 @@ public class UserService extends ClassLoader  {
 
     }
 
-    @Override
-    public Class<?> loadClass(String name) throws ClassNotFoundException {
-        return super.loadClass(name);
-    }
-
-    @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
-        return super.findClass(name);
-    }
 }

@@ -1,4 +1,4 @@
-package cn.xz.controller;
+package cn.xz.testweb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
