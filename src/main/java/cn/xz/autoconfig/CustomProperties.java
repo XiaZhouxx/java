@@ -10,9 +10,21 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  **/
 @ConfigurationProperties("hello")
 public class CustomProperties {
+    /**
+     * 是否启用
+     */
+    private boolean enable;
+
     private String name;
 
-    private boolean state;
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
 
     public String getName() {
         return name;
@@ -20,13 +32,5 @@ public class CustomProperties {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isState() {
-        return state;
-    }
-
-    public void setState(boolean state) {
-        this.state = state;
     }
 }
