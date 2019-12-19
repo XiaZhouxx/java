@@ -1,7 +1,7 @@
 package cn.xz.mq;
 
 import com.rabbitmq.client.Channel;
-import org.apache.log4j.Logger;
+import org.jboss.logging.Logger;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -11,12 +11,12 @@ import java.io.IOException;
 
 /**
  * @author xz
- * @ClassName RabbitMQTest
- * @Description 测试消息队列
+ * @ClassName 消费端
+ * @Description 测试消息队列 以及消息确认ACK机制
  * @date 2019/7/16 0016 9:27
  **/
 @Component
-@RabbitListener(queues = "test")
+// @RabbitListener(queues = "test")
 public class RabbitMQTest {
 
     Logger logger = Logger.getLogger(RabbitMQTest.class);

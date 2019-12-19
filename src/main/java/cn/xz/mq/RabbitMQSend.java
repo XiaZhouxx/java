@@ -1,17 +1,22 @@
 package cn.xz.mq;
 
-import org.apache.log4j.Logger;
+import org.jboss.logging.Logger;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.text.MessageFormat;
 
 /**
  * @author xz
  * @ClassName RabbitMQSend
- * @Description 发送消息
+ * @Description 发送消息 以及发送confirm确认机制
  * @date 2019/7/16 0016 14:05
  **/
-public class RabbitMQSend implements RabbitTemplate.ConfirmCallback {
+@Component
+public class RabbitMQSend implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback {
 
     Logger logger = Logger.getLogger(RabbitMQSend.class);
 
@@ -37,5 +42,9 @@ public class RabbitMQSend implements RabbitTemplate.ConfirmCallback {
         template.convertAndSend("ex_test",msg);
     }
 
-
+    // 消息成功发送到Exchange 但没有发送到队列时回调接口
+    @Override
+    public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
+        logger.info(MessageFormat.format("消息发送ReturnCallback:{0},{1},{2},{3},{4},{5}", message, replyCode, replyText, exchange, routingKey));
+    }
 }
