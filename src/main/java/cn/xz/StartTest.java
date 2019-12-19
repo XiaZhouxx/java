@@ -1,4 +1,4 @@
-package cn.xz.test;
+package cn.xz;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,4 +16,5 @@ public class StartTest implements ApplicationRunner {
     public void run(ApplicationArguments applicationArguments) throws Exception {
         System.out.println("Spring boot 容器启动了");
     }
+
 }
